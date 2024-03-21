@@ -1,4 +1,4 @@
 (library
  (name pbkdf)
  (public_name pbkdf)
- (libraries cstruct mirage-crypto))
+ (libraries cstruct digestif mirage-crypto))

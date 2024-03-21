@@ -1,18 +1,15 @@
+let () = Printexc.record_backtrace true
+
 (* PBKDF1 *)
 let test_pbkdf1 ~hash ~password ~salt ~count ~dk_len ~dk =
-  let salt = Cstruct.of_hex salt
-  and dk = Cstruct.of_hex dk
-  and password = Cstruct.of_string password in
+  let salt = Ohex.decode salt
+  and dk = Ohex.decode dk in
   (fun () ->
      let edk = Pbkdf.pbkdf1 ~hash ~password ~salt ~count ~dk_len in
-     let sedk = Cstruct.to_string edk
-     and sdk = Cstruct.to_string dk
-     in
-     Alcotest.check Alcotest.string "PBKDF1 test" sedk sdk)
+     Alcotest.check Alcotest.string "PBKDF1 test" edk dk)
 
 let test_pbkdf1_invalid_arg ~hash ~password ~salt ~count ~dk_len ~msg =
-  let salt = Cstruct.of_hex salt
-  and password = Cstruct.of_string password in
+  let salt = Ohex.decode salt in
   (fun () ->
      Alcotest.check_raises
        msg
@@ -96,21 +93,14 @@ let pbkdf1_tests = [
 
 (* PBKDF2 *)
 let test_pbkdf2 ~prf ~password ~salt ~count ~dk_len ~dk =
-  let salt = Cstruct.of_hex salt
-  and dk = Cstruct.of_hex dk
-  and password = Cstruct.of_string password
-  in
+  let salt = Ohex.decode salt
+  and dk = Ohex.decode dk in
   (fun () ->
      let edk = Pbkdf.pbkdf2 ~prf ~password ~salt ~count ~dk_len in
-     let sedk = Cstruct.to_string edk
-     and sdk = Cstruct.to_string dk
-     in
-     Alcotest.check Alcotest.string "PBKDF2 test" sedk sdk)
+     Alcotest.check Alcotest.string "PBKDF2 test" edk dk)
 
 let test_pbkdf2_invalid_arg ~prf ~password ~salt ~count ~dk_len ~msg () =
-  let salt = Cstruct.of_hex salt
-  and password = Cstruct.of_string password
-  in
+  let salt = Ohex.decode salt in
   Alcotest.check_raises
     msg
     (Invalid_argument msg)
