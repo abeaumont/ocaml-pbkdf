@@ -15,6 +15,7 @@ depends: [
   "ocaml" {>= "4.07.0"}
   "dune" {>= "1.8.0"}
   "mirage-crypto"
+  "digestif"
   "alcotest" {with-test & >= "0.8.1"}
   "ohex" {with-test}
 ]
