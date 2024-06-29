@@ -1,3 +1,7 @@
+# 2.0.0 (2024-06-29)
+
+* Update to mirage-crypto 1.0.0 (#13 @dinosaure)
+
 # 1.2.0 (2020-08-03)
 
 * Upgrade to Cstruct 6.0.0
