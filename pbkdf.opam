@@ -14,7 +14,7 @@ doc: "https://abeaumont.github.io/ocaml-pbkdf/"
 depends: [
   "ocaml" {>= "4.07.0"}
   "dune" {>= "1.8.0"}
-  "mirage-crypto"
+  "mirage-crypto" {>= "1.0.0"}
   "digestif"
   "alcotest" {with-test & >= "0.8.1"}
   "ohex" {with-test}
@@ -23,8 +23,4 @@ build: [
   [ "dune" "subst" ] {dev}
   [ "dune" "build" "-j" jobs "-p" name "@install" ]
   [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
-]
-
-pin-depends: [
-  [ "mirage-crypto.dev" "git+https://github.com/mirage/mirage-crypto.git#918bef0ea7b7b71f02d27205a183ea5a709a7424" ]
 ]
